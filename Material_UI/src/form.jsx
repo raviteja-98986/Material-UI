@@ -1,11 +1,13 @@
-import { Button, TextField,FormControl,FormControlLabel, Checkbox} from '@mui/material'
+import { Button, TextField,FormControl,FormControlLabel, Checkbox, InputLabel,Select,MenuItem,RadioGroup,Radio,FormLabel} from '@mui/material'
 import React, { useState } from 'react'
 
 export  function Login() {
   const [login, setLogin] = useState({
     userName: "",
     email: "",
-    pwd: ""
+    pwd: "",
+    isagree:false,
+    gender:""
   })
 
   function handleInput(e) {
@@ -57,10 +59,37 @@ export  function Login() {
           sx={{margin:2}}
         />
         <br></br>
-        <Button type="submit">Submit</Button>
+        
         <FormControl>
-          <FormControlLabel lable="Agree term & Conditions" control={<Checkbox/}></FormControlLabel>
+          <FormControlLabel label="Agree term & Conditions" control={<Checkbox/>} onChange={(e)=>{setLogin({
+      ...login,
+      isagree:!login.isagree
+    })}}/>
         </FormControl>
+
+        <FormControl>
+            <InputLabel id="label">Age</InputLabel>
+            <Select labelId="label" id="select" value="20" name="age" onChange={handleInput}>
+              <MenuItem value="10">Ten</MenuItem>
+              <MenuItem value="20">Twenty</MenuItem>
+            </Select>
+
+        </FormControl>
+        <br/>
+              <FormControl>
+        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
+        <RadioGroup
+          aria-labelledby="demo-radio-buttons-group-label"
+          name="gender" onChange={handleInput}
+        >
+          <FormControlLabel value="female" control={<Radio />} label="Female" />
+          <FormControlLabel value="male" control={<Radio />} label="Male" />
+          <FormControlLabel value="other" control={<Radio />} label="Other" />
+        </RadioGroup>
+    </FormControl>
+
+     <br/>
+    <Button type="submit"variant='contained'sx={{mt:2}}>Submit</Button>
       </form>
     </div>
   )
